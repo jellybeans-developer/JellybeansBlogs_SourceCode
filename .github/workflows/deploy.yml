@@ -34,7 +34,7 @@ jobs:
           username: root
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "public/*"
-          target: "/data/docker/hexo/blog"
+          target: "/data/JellyBeans_Blogs/blog"
 
       - name: Restart Nginx
         uses: appleboy/ssh-action@v1.2.0
@@ -43,5 +43,5 @@ jobs:
           username: root
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /data/docker/hexo
+            cd /data/JellyBeans_Blogs
             docker compose restart nginx

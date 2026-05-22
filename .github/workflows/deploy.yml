@@ -18,8 +18,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Dependencies
-        working-directory: ./blog
+      - name: Install Dependencies       
         run: cd blog && npm install
 
       - name: Generate Static Files

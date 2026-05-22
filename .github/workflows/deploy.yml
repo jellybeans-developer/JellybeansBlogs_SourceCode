@@ -20,7 +20,7 @@ jobs:
 
       - name: Install Dependencies
         working-directory: ./blog
-        run: npm install
+        run: cd blog && npm install
 
       - name: Generate Static Files
         working-directory: ./blog

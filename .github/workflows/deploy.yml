@@ -7,11 +7,20 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: blog
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate static files
+        run: npx hexo generate
 
       - name: Build and Deploy
         uses: theme-keep/hexo-deploy-github-pages-action@master # 使用专门部署 Hexo 到 GitHub pages 的 action
@@ -19,4 +28,4 @@ jobs:
           PERSONAL_TOKEN: ${{ secrets.HEXO_DEPLOY }} # secret 名
           PUBLISH_REPOSITORY: jellybeans-developer/JellyBeansBlogs_Content # 公共仓库，格式：GitHub 用户名/仓库名
           BRANCH: main # 分支，填 gh-pages 就行
-          PUBLISH_DIR: ./public # 部署 public 目录下的文件
+          PUBLISH_DIR: ./blog/public # 部署 public 目录下的文件

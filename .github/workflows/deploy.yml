@@ -34,7 +34,7 @@ jobs:
           username: root
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "blog/public/*"
-          target: "/data/JellyBeans_Blogs/blog"
+          target: "/data/JellyBeans_Blogs"
 
       - name: Restart Nginx
         uses: appleboy/ssh-action@v1.2.0

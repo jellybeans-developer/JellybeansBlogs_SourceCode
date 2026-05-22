@@ -33,6 +33,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: root
           key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22
           source: "blog/public/*"
           target: "/data/JellyBeans_Blogs"
 

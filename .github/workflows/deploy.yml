@@ -33,7 +33,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: root
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "public/*"
+          source: "blog/public/*"
           target: "/data/JellyBeans_Blogs/blog"
 
       - name: Restart Nginx

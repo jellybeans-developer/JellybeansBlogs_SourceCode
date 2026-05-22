@@ -1,31 +1,35 @@
-name: deploying Hexo project to GitHub pages
+name: Hexo Deploy
+
 on:
   push:
     branches:
-      - master # master 分支有 push 行为时就触发这个 action
+      - master
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: blog
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        working-directory: ./blog
         run: npm install
 
-      - name: Generate static files
+      - name: Generate Static Files
+        working-directory: ./blog
         run: npx hexo generate
 
-      - name: Build and Deploy
-        uses: theme-keep/hexo-deploy-github-pages-action@master # 使用专门部署 Hexo 到 GitHub pages 的 action
-        env:
-          PERSONAL_TOKEN: ${{ secrets.HEXO_DEPLOY }} # secret 名
-          PUBLISH_REPOSITORY: jellybeans-developer/JellyBeansBlogs_Content # 公共仓库，格式：GitHub 用户名/仓库名
-          BRANCH: main # 分支，填 gh-pages 就行
-          PUBLISH_DIR: ./blog/public # 部署 public 目录下的文件
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.HEXO_DEPLOY }}
+          external_repository: jellybeans-developer/JellyBeansBlogs_Content
+          publish_branch: main
+          publish_dir: ./blog/public

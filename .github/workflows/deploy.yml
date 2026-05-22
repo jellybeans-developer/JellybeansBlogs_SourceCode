@@ -21,9 +21,8 @@ jobs:
       - name: Install Dependencies       
         run: cd blog && npm install
 
-      - name: Generate Static Files
-        working-directory: ./blog
-        run: npx hexo generate
+      - name: Generate Static Files        
+        run: cd blog && npx hexo generate
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

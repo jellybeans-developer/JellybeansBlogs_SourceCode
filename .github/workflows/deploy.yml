@@ -6,10 +6,13 @@ on:
       - main
 
 jobs:
-  deploy:
+
+  build-and-deploy:
+
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -18,16 +21,27 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Dependencies       
+      - name: Install Dependencies
         run: cd blog && npm install
 
-      - name: Generate Static Files        
+      - name: Generate Hexo
         run: cd blog && npx hexo generate
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy to ECS
+        uses: appleboy/scp-action@v0.1.7
         with:
-          personal_token: ${{ secrets.HEXO_DEPLOY }}
-          external_repository: jellybeans-developer/JellyBeansBlogs_Content
-          publish_branch: main
-          publish_dir: ./blog/public
+          host: ${{ secrets.SERVER_HOST }}
+          username: root
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "public/*"
+          target: "/data/JellyBeans_Blogs/blog"
+
+      - name: Restart Nginx
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: root
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /data/JellyBeans_Blogs
+            docker compose restart nginx

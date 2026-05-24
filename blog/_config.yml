@@ -14,7 +14,7 @@ timezone: "UTC"
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: http://blogs.jellybeans.com.cn
-root: /
+root: /blog/public/
 permalink: :category/:title/ #:year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:

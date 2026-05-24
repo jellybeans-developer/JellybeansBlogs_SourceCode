@@ -294,7 +294,7 @@ pjax:
 # Docs: https://keep-docs.xpoet.cn/basis/configuration-guide/footer.html
 # ---------------------------------------------------------------------------------------
 footer:
-  since: 2020 # The starting year of your website, Can be null
+  since: 2026 # The starting year of your website, Can be null
   word_count: false # Option values: true | false
 
   site_deploy:

@@ -35,7 +35,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           source: "blog/public/*"
-          target: "/data/JellyBeans_Blogs/public"
+          target: "/data/JellyBeans_Blogs"
 
       - name: Restart Nginx
         uses: appleboy/ssh-action@v1.2.0

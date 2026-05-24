@@ -169,7 +169,7 @@ toc:
   number: false # Option values: true | false
 
   # If true, all level of TOC in a post will be displayed, rather than the activated part of it.
-  expand_all: false # Option values: true | false
+  expand_all: true # Option values: true | false
 
   # If true, auto open TOC every time when you enter post page
   init_open: true # Option values: true | false

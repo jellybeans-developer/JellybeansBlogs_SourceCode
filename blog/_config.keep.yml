@@ -302,6 +302,10 @@ footer:
     provider: github # Option values: github | vercel | netlify | cloudflare | gitee | aliyun | tencent_cloud | upyun
     url: # Your deployment provider url, Can be null
 
+  icp:
+    enable: true # Option values: true | false
+    record_code: 沪ICP备2026015575号-1 # ICP record code of your website
+    url: https://beian.miit.gov.cn # Your ICP link url, Can be null
   record:
     enable: false # Option values: true | false
     list:

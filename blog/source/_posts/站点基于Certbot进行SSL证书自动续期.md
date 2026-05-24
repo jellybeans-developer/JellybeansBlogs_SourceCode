@@ -1,3 +1,8 @@
+---
+title: 基于certbot为站点自动续期SSL证书
+date: 2026/5/24 22:17:06
+---
+
 # 基于certbot为站点自动续期SSL证书
 
 > 由于公司官网是基于Docker进行部署的，所以此次部署的文档都是基于Docker进行的
@@ -15,7 +20,7 @@ mkdir -p /daya/certbot/nginx-certbot
 在`/data/certbot/nginx-certbot`文件夹下创建`docker-compose.yml`文件和`nginx.conf`文件
 
 ```yaml
-version: '3'
+version: "3"
 
 services:
   nginx:
@@ -41,7 +46,6 @@ services:
         certbot renew --webroot -w /var/www/certbot;
         sleep 12h;
       done"
-
 ```
 
 ```nginx
@@ -90,40 +94,36 @@ server {
 
 ```
 
-
-
-
-
 ## 二、申请证书
 
 > 新申请证书
 
 ```shell
-docker run --rm 
-	-v /data/certbot/conf:/etc/letsencrypt 
-	-v /data/certbot/www:/var/www/certbot certbot/certbot 
+docker run --rm
+	-v /data/certbot/conf:/etc/letsencrypt
+	-v /data/certbot/www:/var/www/certbot certbot/certbot
 	certonly
-    --webroot 
-    --webroot-path=/var/www/certbot 
-    -d jellybeans.com.cn 
-    --email xueyinghao@jellybeans.com.cn 
+    --webroot
+    --webroot-path=/var/www/certbot
+    -d jellybeans.com.cn
+    --email xueyinghao@jellybeans.com.cn
     --agree-tos --no-eff-email
 ```
 
 > 追加申请证书
 
 ```shell
-docker run --rm 
-	-v /data/certbot/conf:/etc/letsencrypt 
-	-v /data/certbot/www:/var/www/certbot 
-	certbot/certbot certonly 
-	--webroot 
-	--webroot-path=/var/www/certbot 
-	-d jellybeans.com.cn 
-	-d www.jellybeans.com.cn 
-	--email xueyinghao@jellybeans.com.cn 
-	--agree-tos 
-	--no-eff-email 
+docker run --rm
+	-v /data/certbot/conf:/etc/letsencrypt
+	-v /data/certbot/www:/var/www/certbot
+	certbot/certbot certonly
+	--webroot
+	--webroot-path=/var/www/certbot
+	-d jellybeans.com.cn
+	-d www.jellybeans.com.cn
+	--email xueyinghao@jellybeans.com.cn
+	--agree-tos
+	--no-eff-email
 	--expand
 ```
 
@@ -133,8 +133,6 @@ docker run --rm
 
 - `fullchain.pem`
 - `privkey.pem`
-
-
 
 ## 三、自动续期
 
@@ -150,11 +148,8 @@ crontab -e
 0 3 * * * docker run --rm -v /data/certbot/conf:/etc/letsencrypt -v /data/certbot/www:/var/www/certbot certbot/certbot renew --quiet --deploy-hook "docker exec my-nginx nginx -s reload"
 ```
 
-
-
 ## 四、修改完Nginx配置文件重启
 
 ```shell
 docker exec jellybeans_portal nginx -s reload
 ```
-

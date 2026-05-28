@@ -33,7 +33,7 @@ base_info:
 # e.g. to enable categories, you need to execute `hexo new page categories`
 # Use `||` to set icon for navigation menu, e.g. `home: / || fa-solid fa-home`
 menu:
-  首页1: / || fa-solid fa-home
+  首页: / || fa-solid fa-home
   归档: /archives/ || fa-solid fa-box-archive
   标签: /tags/ || fa-solid fa-tags
   分类: /categories/ || fa-solid fa-layer-group

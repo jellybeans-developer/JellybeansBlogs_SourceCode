@@ -10,7 +10,7 @@ page_cover: https://img1.baidu.com/it/u=2523242416,2388336867&fm=253&fmt=auto&ap
 
 ## 一、创建对应的文件夹
 
-在宿主机的`/`目录下创建以下文件夹
+在宿主机的`/`目录下创建以下文件夹.
 
 ```shell
 mkdir -p /data/certbot/conf

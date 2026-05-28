@@ -1,6 +1,7 @@
 ---
 title: 基于certbot为站点自动续期SSL证书
 date: 2026/5/24 22:17:06
+page_cover: https://img1.baidu.com/it/u=2523242416,2388336867&fm=253&fmt=auto&app=138&f=JPEG
 ---
 
 # 基于certbot为站点自动续期SSL证书

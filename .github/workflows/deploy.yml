@@ -24,20 +24,6 @@ jobs:
       - name: Install Dependencies
         run: cd blog && npm install
 
-      - name: Patch Keep config
-        run: |
-          python3 - <<EOF
-          path = "blog/node_modules/hexo-theme-keep/_config.yml"
-          with open(path, "r", encoding="utf-8") as f:
-              data = f.read()
-      
-          data = data.replace("Home: /", "# Home: /")
-          data = data.replace("Archives: /archives/", "# Archives: /archives/")
-      
-          with open(path, "w", encoding="utf-8") as f:
-              f.write(data)
-          EOF
-      
       - name: Generate Hexo
         run: cd blog && npx hexo generate
 
